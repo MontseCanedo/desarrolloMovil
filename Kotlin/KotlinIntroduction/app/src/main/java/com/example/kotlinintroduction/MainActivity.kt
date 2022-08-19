@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         if(vip == true) saludo += ", te queremos mucho"
         else saludo += ", ¿quieres ser vip? paga tu membresía ahora"
 
+        mostrar_saldo()
+
         var dia = fecha.subSequence(0, 2).toString().toInt()
         if(dia == 1) ingresar_sueldo()
 
@@ -55,6 +57,18 @@ class MainActivity : AppCompatActivity() {
         if (intentos == 3) println("tarjeta bloqueada")
 
         mostrar_saldo()
+        ingresar_dinero(12.5f)
+        retirar_dinero(40000.0f)
+
+        var recibos: Array<String> = arrayOf("luz", "agua", "gas")
+        recibos.set(2, "internet")
+        recorrer_array(recibos)
+
+        var matriz = arrayOf(
+            intArrayOf(1,2,3),
+            intArrayOf(4,5,6),
+            intArrayOf(7,8,9)
+        )
 
 
         //while (){
@@ -122,5 +136,38 @@ class MainActivity : AppCompatActivity() {
         saldo += sueldo
         println("Se ha ingresado tu sueldo de $sueldo $moneda")
         mostrar_saldo()
+    }
+
+    fun ingresar_dinero(cantidad: Float){
+        saldo += cantidad
+        println("se ha ingresado $cantidad $moneda")
+        mostrar_saldo()
+    }
+
+    fun retirar_dinero(cantidad: Float){
+        if(verificarCantidad(cantidad)){
+            saldo -= cantidad
+            println("se ha retirado $cantidad $moneda")
+            mostrar_saldo()
+        }
+        else{
+            println("saldo insuficiente")
+        }
+    }
+
+    fun verificarCantidad(cantidad: Float): Boolean{
+        if(cantidad > saldo) return false
+        else return true
+    }
+
+    fun recorrer_array(a: Array<String>){
+        for (i in a )
+            println(i)
+
+        for(i in a.indices)
+            println(a.get(i))
+
+        for (i in 0.. a.size - 1)
+            println("${i+1}: ${a.get(i)}")
     }
 }
